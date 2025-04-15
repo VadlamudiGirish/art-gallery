@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
+import ColorPalette from "../ColorPalette/ColorPalette";
 
 export default function DetailPage({ element }) {
   const router = useRouter();
@@ -26,19 +27,8 @@ export default function DetailPage({ element }) {
           <p className="text-gray-600 mb-4">{`Year: ${element.year}`}</p>
           <p className="text-gray-600 mb-4">{`Genre: ${element.genre}`}</p>
 
-          <div className="mb-6">
-            <h3 className="text-lg font-semibold mb-2">Colors:</h3>
-            <div className="flex space-x-2">
-              {element.colors.map((color) => {
-                return (
-                  <div
-                    className="w-8 h-8 rounded-full"
-                    style={{ backgroundColor: color }}
-                  />
-                );
-              })}
-            </div>
-          </div>
+          <ColorPalette colors={element.colors} />
+
           <div className="flex space-x-4 mb-6">
             <button
               onClick={(e) => {
