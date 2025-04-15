@@ -14,7 +14,7 @@ export default function ArtPieces() {
 
   return (
     <>
-      <CardList elements={art_pieces} elementName={"art-pieces"} />
+      <CardList elements={art_pieces} elementName={"art-piece"} />
     </>
   );
 }
