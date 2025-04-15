@@ -1,7 +1,15 @@
 import Spotlight from "@/components/Spotlight/Spotlight";
 import fetchArtPieces from "../scripts/APIClient";
+import { useHeaderStore } from "../store/headerStore";
+import { useEffect } from "react";
 
 export default function SpotLight() {
+  const setPageName = useHeaderStore((state) => state.setPageName);
+
+  useEffect(() => {
+    setPageName("Spotlight");
+  }, [setPageName]);
+
   const apiResponse = fetchArtPieces();
 
   if (apiResponse.error) return <div>Failed to load art pieces.</div>;
