@@ -1,11 +1,20 @@
-export default function Header({ name = "Gallery" }) {
+import { useRouter } from "next/router";
+
+const TITLE_MAP = {
+  "/": "Spotlight",
+  "/gallery": "Gallery",
+  "/favorites": "Favorites",
+};
+
+export default function Header() {
+  const router = useRouter();
+  const title = TITLE_MAP[router.pathname] || "Art Gallery";
+
   return (
-    <div className="md:flex md:items-center md:justify-between">
-      <div className="min-w-0 flex-1">
-        <h2 className="text-2xl/7 font-bold text-white sm:truncate sm:text-3xl sm:tracking-tight">
-          {name}
-        </h2>
+    <header className="bg-gray-900 fixed top-0 w-full z-10">
+      <div className="max-w-7xl mx-auto px-4 py-4">
+        <h1 className="text-2xl font-bold text-white">{title}</h1>
       </div>
-    </div>
+    </header>
   );
 }
