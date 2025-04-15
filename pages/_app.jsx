@@ -11,11 +11,10 @@ export default function App({ Component, pageProps }) {
       >
         <Header />
       </header>
-      <main className="flex-1 pb-24">
-        {" "}
-        {/* Fills available space + padding for footer */}
+      <main className="flex-1 pb-24 pt-20">
         <Component {...pageProps} />
       </main>
+
       <footer className="bg-gray-900 fixed bottom-0 left-0 right-0 z-50">
         <Navbar />
       </footer>

@@ -1,23 +1,18 @@
+import { useEffect } from "react";
 import CardList from "@/components/CardList/CardList";
 import fetchArtPieces from "../../scripts/APIClient";
 import { useHeaderStore } from "../../store/headerStore";
-import { useEffect } from "react";
 
 export default function Gallery() {
+  const { data, error, isLoading } = fetchArtPieces();
   const setPageName = useHeaderStore((state) => state.setPageName);
 
   useEffect(() => {
     setPageName("Gallery");
   }, [setPageName]);
 
-  const apiResponse = fetchArtPieces();
+  if (error) return <div>Failed to load art pieces.</div>;
+  if (isLoading || !data.length) return <div>Loading...</div>;
 
-  if (apiResponse.error) return <div>Failed to load art pieces.</div>;
-  if (apiResponse.isLoading || !apiResponse.data) return <div>Loading...</div>;
-
-  return (
-    <>
-      <CardList elements={apiResponse.data} elementName={"art-piece"} />
-    </>
-  );
+  return <CardList elements={data} elementName={"gallery"} />;
 }
