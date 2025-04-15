@@ -1,4 +1,4 @@
-export default function Header({ name = "Art pieces" }) {
+export default function Header({ name = "Gallery" }) {
   return (
     <div className="md:flex md:items-center md:justify-between">
       <div className="min-w-0 flex-1">
