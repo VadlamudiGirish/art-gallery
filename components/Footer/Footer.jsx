@@ -2,8 +2,8 @@ import { useState } from "react";
 
 const navigation = [
   { name: "Spotlight", href: "/" },
-  { name: "Art pieces", href: "/art-pieces" },
-  { name: "Favorites", href: "#favorites" },
+  { name: "Gallery", href: "/gallery" },
+  { name: "Favorites", href: "/favorites" },
 ];
 
 export default function Navbar() {
