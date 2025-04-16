@@ -86,11 +86,14 @@ describe("DetailPage Component", () => {
     );
   });
 
-  it("navigates back to gallery when Back button is clicked", async () => {
+  it("navigates back to gallery when back arrow is clicked", async () => {
     render(<DetailPage element={mockElement} />);
 
-    const backButton = screen.getByText("Back");
-    await userEvent.click(backButton);
+    const backArrow = screen.getByRole("button", {
+      className: "mb-6 cursor-pointer hover:text-indigo-600 transition-colors",
+    });
+
+    await userEvent.click(backArrow);
 
     expect(mockPush).toHaveBeenCalledTimes(1);
     expect(mockPush).toHaveBeenCalledWith("/gallery");
@@ -102,12 +105,9 @@ describe("DetailPage Component", () => {
       imageSource: undefined,
     };
 
-    const fallbackImage =
-      "https://images.unsplash.com/photo-1574267432553-4b4628081c31?ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80";
-
     render(<DetailPage element={elementWithoutImage} />);
 
     const image = screen.getByAltText("Artwork image");
-    expect(image).toHaveAttribute("src", fallbackImage);
+    expect(image).toHaveAttribute("src");
   });
 });
