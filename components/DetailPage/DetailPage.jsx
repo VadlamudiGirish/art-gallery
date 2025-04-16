@@ -1,24 +1,41 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import ColorPalette from "../ColorPalette/ColorPalette";
-import FavoriteButton from "../FavoriteButton/FavoriteButton";
+import Card from "../Card/Card";
 
 export default function DetailPage({ element }) {
   const router = useRouter();
+
   return (
     <div className="container mx-auto px-4 py-8">
+      <button
+        aria-label="Back to gallery"
+        id="back-to-gallery"
+        onClick={(e) => {
+          e.preventDefault();
+          router.push("/gallery");
+        }}
+        className="mb-6 cursor-pointer hover:text-indigo-600 transition-colors"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-8 h-8"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+          />
+        </svg>
+      </button>
+
       <div className="flex flex-wrap -mx-4">
         <div className="w-full md:w-1/2 px-4 mb-8">
-          <Image
-            width={element.dimensions.width}
-            height={element.dimensions.height}
-            alt="Artwork image"
-            src={
-              element.imageSource ||
-              "https://images.unsplash.com/photo-1574267432553-4b4628081c31?ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80"
-            }
-            className="w-full h-auto object-cover"
-          />
+          <Card element={element} elementName="artwork" isLink={false} />
         </div>
 
         <div className="w-full md:w-1/2 px-4">
@@ -28,19 +45,6 @@ export default function DetailPage({ element }) {
           <p className="text-gray-600 mb-4">{`Genre: ${element.genre}`}</p>
 
           <ColorPalette colors={element.colors} />
-
-          <div className="flex gap-4 mb-6">
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                router.push("/gallery");
-              }}
-              className="bg-indigo-600 flex gap-2 items-center text-white px-6 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-            >
-              Back
-            </button>
-            <FavoriteButton artPiece={element} />
-          </div>
         </div>
       </div>
     </div>

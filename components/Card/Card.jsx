@@ -2,31 +2,39 @@ import Image from "next/image";
 import Link from "next/link";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
 
-export default function Card({ element, elementName }) {
-  return (
-    <Link href={`/${elementName}/${element.slug}`} passHref legacyBehavior>
-      <a className="group">
-        <div className="w-full overflow-hidden rounded-lg relative">
-          <Image
-            width={element.dimensions.width}
-            height={element.dimensions.height}
-            alt="Artwork image"
-            src={
-              element.imageSource ||
-              "https://images.unsplash.com/photo-1574267432553-4b4628081c31?ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80"
-            }
-            className="w-full h-auto object-cover group-hover:opacity-75"
-          />
-          {/* Position the favorite button in the top-right corner */}
-          <div className="absolute top-2 right-2">
-            <FavoriteButton artPiece={element} />
-          </div>
+export default function Card({ element, elementName, isLink = true }) {
+  const content = (
+    <>
+      <div className="w-full overflow-hidden rounded-lg relative">
+        <Image
+          width={element.dimensions.width}
+          height={element.dimensions.height}
+          alt="Artwork image"
+          src={element.imageSource || "..."}
+          className="w-full h-auto object-cover group-hover:opacity-75"
+        />
+        <div className="absolute top-2 right-2">
+          <FavoriteButton artPiece={element} />
         </div>
-        <h3 className="mt-4 text-lg text-gray-700">{element.name}</h3>
-        <p className="mt-1 text-sm font-medium text-gray-900">
-          {element.artist}
-        </p>
-      </a>
+      </div>
+      {isLink ? (
+        <>
+          <h3 className="mt-4 text-lg text-gray-700">{element.name}</h3>
+          <p className="mt-1 text-sm font-medium text-gray-900">
+            {element.artist}
+          </p>
+        </>
+      ) : (
+        <></>
+      )}
+    </>
+  );
+
+  return isLink ? (
+    <Link href={`/${elementName}/${element.slug}`} passHref legacyBehavior>
+      <a className="group">{content}</a>
     </Link>
+  ) : (
+    <div className="group">{content}</div>
   );
 }

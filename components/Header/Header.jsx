@@ -8,7 +8,9 @@ const TITLE_MAP = {
 
 export default function Header() {
   const router = useRouter();
-  const title = TITLE_MAP[router.pathname] || "Art Gallery";
+  const title = router.pathname.startsWith("/gallery/")
+    ? "Art work details"
+    : TITLE_MAP[router.pathname] || "Art Gallery";
 
   return (
     <header className="bg-gray-900 fixed top-0 w-full z-10">

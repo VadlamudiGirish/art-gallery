@@ -1,16 +1,16 @@
 import useFavoritesStore from "@/store/favoritesStore";
 
 export default function FavoriteButton({ artPiece }) {
-  // Get favorites and toggleFavorite from the store.
   const { favorites, toggleFavorite } = useFavoritesStore();
   const isFavorite = !!favorites[artPiece.slug];
 
   return (
     <button
       onClick={(e) => {
-        e.preventDefault(); // In case this button is inside a Link.
+        e.preventDefault();
         toggleFavorite(artPiece);
       }}
+      aria-label={isFavorite ? "Unfavorite" : "Favorite"}
       className={`flex items-center gap-2 px-4 py-2 rounded-md focus:outline-none 
         ${
           isFavorite
@@ -19,7 +19,6 @@ export default function FavoriteButton({ artPiece }) {
         }`}
     >
       {isFavorite ? (
-        // Filled heart icon for favorited art piece
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"
@@ -33,7 +32,6 @@ export default function FavoriteButton({ artPiece }) {
           />
         </svg>
       ) : (
-        // Outlined heart icon for non-favorited art piece
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
