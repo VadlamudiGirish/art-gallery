@@ -89,9 +89,7 @@ describe("DetailPage Component", () => {
   it("navigates back to gallery when back arrow is clicked", async () => {
     render(<DetailPage element={mockElement} />);
 
-    const backArrow = screen.getByRole("button", {
-      className: "mb-6 cursor-pointer hover:text-indigo-600 transition-colors",
-    });
+    const backArrow = screen.getByTestId("back-to-gallery");
 
     await userEvent.click(backArrow);
 

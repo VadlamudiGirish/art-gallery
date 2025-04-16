@@ -1,16 +1,25 @@
-import Image from "next/image";
 import { useRouter } from "next/router";
-import ColorPalette from "../ColorPalette/ColorPalette";
 import Card from "../Card/Card";
+import ColorPalette from "../ColorPalette/ColorPalette";
+import CommentForm from "../CommentForm/CommentForm";
+import CommentList from "../CommentList/CommentList";
+import { useCommentStore } from "../../store/commentsStore";
 
 export default function DetailPage({ element }) {
   const router = useRouter();
+  const { comments, addComment } = useCommentStore();
+
+  const artworkComments = comments[element.slug] || [];
+
+  const handleSubmitComment = (text) => {
+    addComment(element.slug, text);
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
       <button
+        data-testid="back-to-gallery"
         aria-label="Back to gallery"
-        id="back-to-gallery"
         onClick={(e) => {
           e.preventDefault();
           router.push("/gallery");
@@ -45,6 +54,11 @@ export default function DetailPage({ element }) {
           <p className="text-gray-600 mb-4">{`Genre: ${element.genre}`}</p>
 
           <ColorPalette colors={element.colors} />
+
+          <div className="mt-12 border-t pt-8">
+            <CommentList comments={artworkComments} />
+            <CommentForm onSubmit={handleSubmitComment} />
+          </div>
         </div>
       </div>
     </div>
