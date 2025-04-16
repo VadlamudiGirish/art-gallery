@@ -14,20 +14,28 @@ export default function Footer() {
     <nav className="bg-gray-900 fixed bottom-0 w-full">
       <div className="max-w-7xl mx-auto px-4 py-3">
         <div className="flex justify-center gap-2 sm:gap-4">
-          {NAV_ITEMS.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors
-                ${
-                  router.pathname === item.href
-                    ? "bg-blue-600 text-white"
-                    : "text-gray-300 hover:bg-gray-800"
-                }`}
-            >
-              {item.name}
-            </Link>
-          ))}
+          {NAV_ITEMS.map((item) => {
+            const isGalleryActive =
+              item.href === "/gallery" &&
+              router.pathname.startsWith("/gallery");
+
+            const isActive = router.pathname === item.href;
+
+            return (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors
+                  ${
+                    isGalleryActive || isActive
+                      ? "bg-blue-600 text-white"
+                      : "text-gray-300 hover:bg-gray-800"
+                  }`}
+              >
+                {item.name}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </nav>
