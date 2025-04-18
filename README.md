@@ -1,8 +1,6 @@
-# Recap Project 5: Art Gallery
+## Art Gallery
 
-In this project, your team will create an interactive art gallery app.
-
-This is a group project, so please create **only one project per group** follow this [guide to setup your repository](./docs/github-respository-template.md).
+In this project, you will create an interactive art gallery app.
 
 ## Overview
 
